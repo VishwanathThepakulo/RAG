@@ -1,0 +1,9 @@
+pymongo
+langchain
+langchain_community
+openai
+pypdf
+langchain 
+langchain-huggingface 
+sentence_transformers
+langchain_text_splitters
