@@ -3,9 +3,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 import os
 
- #load variables from.env
-
-
 
 class Embedding:
     def __init__(self):
@@ -37,78 +34,6 @@ class Embedding:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# for doc in document:
-#     item = {
-#         "text": doc.page_content,
-#         "embeddings": get_embeddings(doc.page_content)
-#     }
-#     docs_to_insert.append(item)
-# print(docs_to_insert[0])
-
-# print(data[0].page_content,'\n===========\n',data[1].page_content)
-
-
-
-
-
-
-
-# print(HuggingFaceEndpointEmbeddings.model_fields)
-
-
-# from langchain_huggingface import HuggingFaceEndpointEmbeddings
-
-# print(HuggingFaceEndpointEmbeddings.__mro__)
-
-
-
-# from pydantic import BaseModel
-# class Student(BaseModel):
-#     age: float
-
-# s = Student(age="abc")
-# print(s.age)
-# print(type(s.age))
-
-
-# class Parent:
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-        
-# class Child(Parent):
-#     def details(self):
-#         return f"Name is {self.name} and age is {self.age}"
-    
-# child = Child("Vishwa",25)
-
-# print(child.details())
 
 
 
