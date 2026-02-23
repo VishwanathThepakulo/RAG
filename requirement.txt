@@ -7,3 +7,5 @@ langchain
 langchain-huggingface 
 sentence_transformers
 langchain_text_splitters
+fastapi
+uvicorn
