@@ -29,6 +29,10 @@ class Embedding:
         # print(docs_to_insert[0])
         # print(len(docs_to_insert[0]['embeddings']))
         return docs_to_insert
+    
+    def query_embedding(self, query_text):
+        result = self.embedding_model.embed_documents(query_text)
+        return result
 
 
 
