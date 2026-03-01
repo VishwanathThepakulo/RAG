@@ -64,6 +64,28 @@ class DBConnection:
         'Index':'created'
       }
 
+    def vector_search(self, query_vector, limit=5):
+      pipeline = [
+        {
+          '$vectorSearch':{
+            'index':'vector_index',
+            'path':'embeddings',
+            'queryVector':query_vector,
+            'numCandidates':100,
+            'limit':limit
+          }
+        },{
+          '$project':{
+            '_id':0,
+            'text':1,
+            "score": {"$meta": "vectorSearchScore"}
+          }
+        }
+      ]
+      results = list(self.collection.aggregate(pipeline))
+      return results
+
+
     def connection_close(self):
       self.mongo_client.close()
       

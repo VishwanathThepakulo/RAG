@@ -6,6 +6,9 @@ from pydantic import BaseModel
 
 class Validation(BaseModel):
     path : str
+    question : str
+class Validation1(BaseModel):
+    question : str
 
 app = FastAPI()
 embedding = Embedding()
@@ -28,10 +31,19 @@ def emb_and_insertion(file_path:Validation):
         'inserted_count':len(db_inesrtion.inserted_ids),
         'indexing':indexing
     }
+
+@app.post('/query')    
+def user_question(question: Validation1):
+    query_vector = embedding.query_embedding(question.question)
     
-def user_question(question:Validation):
-    query = embedding.query_embedding(question)
-    return query
+    db = DBConnection()
+    result = db.vector_search(query_vector)
+    db.connection_close()
+
+    return {
+        'status': 200,
+        'vector_sample': result
+    }
     
     
 
@@ -44,9 +56,9 @@ def main():
     # user_query = input("Enter user query : ")
     # embedded_user_query = user_question(user_query)
     # print(embedded_user_query[0][:10])
+    pass
     
     
-
 
 if __name__ == "__main__":
     import uvicorn

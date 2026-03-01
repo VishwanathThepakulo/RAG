@@ -30,8 +30,9 @@ class Embedding:
         # print(len(docs_to_insert[0]['embeddings']))
         return docs_to_insert
     
-    def query_embedding(self, query_text):
-        result = self.embedding_model.embed_documents(query_text)
+    def query_embedding(self, query_text:str):
+        result = self.embedding_model.embed_query(query_text)
+        print(type(result))
         return result
 
 
