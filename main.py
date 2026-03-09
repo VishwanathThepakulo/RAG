@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from embedding_logic import Embedding
 from DB_insertion import DBConnection
+from model_calling import calling
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -37,16 +38,21 @@ def user_question(question: Validation1):
     query_vector = embedding.query_embedding(question.question)
     
     db = DBConnection()
-    result = db.vector_search(query_vector)
+    results = db.vector_search(query_vector)
+    texts = []
+    for doc in results:
+        texts.append(doc['text'])
+    context = "\n\n".join(texts)
+    
+    ai_reply = calling(question.question, context)
+        
     db.connection_close()
 
     return {
         'status': 200,
-        'vector_sample': result
+        'answer': ai_reply
     }
     
-    
-
 
 
 def main():
